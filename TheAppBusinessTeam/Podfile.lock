@@ -1,0 +1,13 @@
+PODS:
+  - hpple (0.2.0)
+  - Kiwi (2.3.0)
+
+DEPENDENCIES:
+  - hpple (~> 0.2.0)
+  - Kiwi
+
+SPEC CHECKSUMS:
+  hpple: f4eb7c21a8db83ec264e5d614ec7509e10e5adec
+  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+
+COCOAPODS: 0.33.1
