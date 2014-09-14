@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SWTeamMasterCollectionView : UICollectionViewController
+@interface SWTeamMasterCollectionViewController : UICollectionViewController
 
 @end

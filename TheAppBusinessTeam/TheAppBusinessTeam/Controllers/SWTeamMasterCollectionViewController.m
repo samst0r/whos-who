@@ -6,44 +6,78 @@
 //  Copyright (c) 2014 Samuel Ward. All rights reserved.
 //
 
-#import "SWTeamMasterCollectionView.h"
+#import "SWTeamMasterCollectionViewController.h"
 
-@interface SWTeamMasterCollectionView ()
+#import "SWTeamMember.h"
+
+@interface SWTeamMasterCollectionViewController () <UICollectionViewDataSource>
+
+@property (nonatomic, copy) NSArray *teamMembers;
 
 @end
 
-@implementation SWTeamMasterCollectionView
+@implementation SWTeamMasterCollectionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+#pragma mark - Initialisation 
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    
     if (self) {
-        // Custom initialization
+        
+        [self refresh];
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (instancetype)init
 {
+    self = [super init];
+    
+    if (self) {
+        
+        [self refresh];
+    }
+    
+    return self;
+}
+
+#pragma mark - Life Cycle
+
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.title = @"Team Members Master View";
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 
+
+- (void)refresh {
+    
+    SWTeamMember *teamMember1 = [[SWTeamMember alloc] init];
+    SWTeamMember *teamMember2 = [[SWTeamMember alloc] init];
+    SWTeamMember *teamMember3 = [[SWTeamMember alloc] init];
+    
+    self.teamMembers = @[teamMember1, teamMember2, teamMember3];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - UICollectionViewDataSource Methods
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
+    
+    return self.teamMembers.count;
 }
-*/
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"teamHeadshotCellReuseIdentifier"
+                                                                           forIndexPath:indexPath];
+    
+    return cell;
+}
 
 @end
