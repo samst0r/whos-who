@@ -10,7 +10,6 @@
 
 #import "SWTeamMemberHeadShotCell.h"
 
-
 SPEC_BEGIN(SWTeamMemberHeadShotCellSpec)
 
 describe(@"SWTeamMemberHeadShotCell", ^{

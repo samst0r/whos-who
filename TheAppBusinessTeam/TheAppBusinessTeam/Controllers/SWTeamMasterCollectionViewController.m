@@ -9,6 +9,8 @@
 #import "SWTeamMasterCollectionViewController.h"
 
 #import "SWTeamMember.h"
+#import "SWTeamMemberHeadShotCell.h"
+#import "SWWebsiteScrapper.h"
 
 @interface SWTeamMasterCollectionViewController () <UICollectionViewDataSource>
 
@@ -50,17 +52,43 @@
     [super viewDidLoad];
     
     self.title = @"Team Members Master View";
+    self.collectionView.alwaysBounceVertical = YES;
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (void)refresh {
     
-    SWTeamMember *teamMember1 = [[SWTeamMember alloc] init];
-    SWTeamMember *teamMember2 = [[SWTeamMember alloc] init];
-    SWTeamMember *teamMember3 = [[SWTeamMember alloc] init];
-    
-    self.teamMembers = @[teamMember1, teamMember2, teamMember3];
+    [SWWebsiteScrapper downloadDataWithCompletionBlock:^(BOOL success, NSArray *teamMembers) {
+       
+        if (success) {
+            
+            self.teamMembers = teamMembers;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.collectionView.alpha = 0.0f;
+                [UIView animateWithDuration:0.3f animations:^{
+                    
+                    [self.collectionView reloadData];
+                    self.collectionView.alpha = 1.0f;
+                }];
+            });
+            
+            for (int i = 0; i < self.teamMembers.count; ++i) {
+                
+                SWTeamMember *teamMember = self.teamMembers[i];
+                
+                [teamMember getImageWithCompletionBlock:^{
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:i inSection:0]]];
+                    });
+                }];
+            }
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDataSource Methods
@@ -74,8 +102,14 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"teamHeadshotCellReuseIdentifier"
-                                                                           forIndexPath:indexPath];
+    SWTeamMemberHeadShotCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"teamHeadshotCellReuseIdentifier"
+                                                                               forIndexPath:indexPath];
+            
+    SWTeamMember *teamMember = self.teamMembers[indexPath.item];
+    
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@ %@", teamMember.firstName, teamMember.surname];
+    cell.positionLabel.text = teamMember.position;
+    cell.headShotImageView.image = teamMember.image;
     
     return cell;
 }

@@ -24,17 +24,19 @@ describe(@"SWTeamMember", ^{
         
         it(@"should set the firstname, surname, description and imageURL", ^{
            
-            NSURL *url = [NSURL URLWithString:@"www.google.com"];
+//            UIImage *image = [[UIImage alloc] init];
             
             SWTeamMember *teamMember = [[SWTeamMember alloc] initWithFirstName:@"firstName"
                                                                        surname:@"surname"
+                                                                      position:@"position"
                                                                    description:@"description"
-                                                                      imageURL:url];
+                                                                      imageURL:@"imageURL"];
             
             [[teamMember.firstName should] equal:@"firstName"];
             [[teamMember.surname should] equal:@"surname"];
+            [[teamMember.position should] equal:@"position"];
             [[teamMember.description should] equal:@"description"];
-            [[teamMember.imageURL should] equal:url];
+//            [[teamMember.image should] equal:image];
         });
         
         context(@"Properties", ^{
@@ -63,23 +65,35 @@ describe(@"SWTeamMember", ^{
 #pragma clang diagnostic pop
             });
             
-            it(@"should have a readonly description", ^{
+            it(@"should have a readonly surname", ^{
                 
                 SWTeamMember *teamMember = [[SWTeamMember alloc] init];
                 
-                [[teamMember should] respondToSelector:@selector(description)];
-                [[teamMember shouldNot] respondToSelector:@selector(setDescription:)];
+                [[teamMember should] respondToSelector:@selector(surname)];
+                
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                [[teamMember shouldNot] respondToSelector:@selector(setSurname:)];
+#pragma clang diagnostic pop
+            });
+            
+            it(@"should have a readonly position", ^{
+                
+                SWTeamMember *teamMember = [[SWTeamMember alloc] init];
+                
+                [[teamMember should] respondToSelector:@selector(position)];
+                [[teamMember shouldNot] respondToSelector:@selector(setPosition:)];
             });
             
             it(@"should have a readonly imageURL", ^{
                 
                 SWTeamMember *teamMember = [[SWTeamMember alloc] init];
                 
-                [[teamMember should] respondToSelector:@selector(imageURL)];
+                [[teamMember should] respondToSelector:@selector(image)];
                 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-                [[teamMember shouldNot] respondToSelector:@selector(setImageURL:)];
+                [[teamMember shouldNot] respondToSelector:@selector(setImage:)];
 #pragma clang diagnostic pop
             });
         });

@@ -12,12 +12,18 @@
 
 @property (nonatomic, readonly, copy) NSString *firstName;
 @property (nonatomic, readonly, copy) NSString *surname;
+@property (nonatomic, readonly, copy) NSString *position;
 @property (nonatomic, readonly, copy) NSString *description;
-@property (nonatomic, readonly) NSURL *imageURL;
+@property (nonatomic, readonly, copy) NSString *imageURL;
+
+@property (nonatomic) UIImage *image;
 
 - (instancetype)initWithFirstName:(NSString *)firstName
                           surname:(NSString *)surname
+                         position:(NSString *)position
                       description:(NSString *)description
-                         imageURL:(NSURL *)imageURL;
+                         imageURL:(NSString *)imageURL;
+
+- (void)getImageWithCompletionBlock:(void (^)())completionBlock;
 
 @end

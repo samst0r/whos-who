@@ -12,10 +12,12 @@
 
 #import "SWTeamMember.h"
 #import "SWTeamMemberHeadShotCell.h"
+#import "SWWebsiteScrapper.h"
 
 @interface SWTeamMasterCollectionViewController ()
 
 @property (nonatomic, copy) NSArray *teamMembers;
+
 - (void)refresh;
 
 @end
@@ -48,27 +50,12 @@ describe(@"SWTeamMasterCollectionView", ^{
             [[teamMasterCollectionViewController should] respondToSelector:@selector(teamMembers)];
         });
         
-        context(@"Team Members Array", ^{
+        it(@"should call refresh", ^{
             
-            it(@"should call refresh", ^{
-                
-                SWTeamMasterCollectionViewController *refreshTestController = [SWTeamMasterCollectionViewController alloc];
-                [[refreshTestController should] receive:@selector(refresh)];
-                
-                id __unused initialisedRefreshController = [refreshTestController init];
-            });
+            SWTeamMasterCollectionViewController *refreshTestController = [SWTeamMasterCollectionViewController alloc];
+            [[refreshTestController should] receive:@selector(refresh)];
             
-            it(@"should set the array when the view is initialised", ^{
-                
-                [[theValue(teamMasterCollectionViewController.teamMembers.count) should] equal:theValue(3)];
-            });
-            
-            it(@"should contain SWTeamMembers", ^{
-                
-                [[teamMasterCollectionViewController.teamMembers[0] should] beKindOfClass:[SWTeamMember class]];
-                [[teamMasterCollectionViewController.teamMembers[1] should] beKindOfClass:[SWTeamMember class]];
-                [[teamMasterCollectionViewController.teamMembers[2] should] beKindOfClass:[SWTeamMember class]];
-            });
+            id __unused initialisedRefreshController = [refreshTestController init];
         });
     });
     
@@ -112,6 +99,26 @@ describe(@"SWTeamMasterCollectionView", ^{
                        cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
             
             [[cell should] beKindOfClass:[SWTeamMemberHeadShotCell class]];
+        });
+    });
+    
+    context(@"Refreshing", ^{
+        
+        SWTeamMasterCollectionViewController __block *teamMasterCollectionViewController;
+        
+        beforeEach(^{
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+            
+            teamMasterCollectionViewController = [storyboard instantiateViewControllerWithIdentifier:@"teamMasterViewController"];
+        });
+        
+        it(@"should start downloading the html page", ^{
+           
+            [SWWebsiteScrapper stub:@selector(downloadDataWithCompletionBlock:)];
+            [[SWWebsiteScrapper should] receive:@selector(downloadDataWithCompletionBlock:)];
+            
+            [teamMasterCollectionViewController refresh];
         });
     });
 });
