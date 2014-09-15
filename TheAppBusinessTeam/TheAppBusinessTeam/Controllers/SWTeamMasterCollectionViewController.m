@@ -11,6 +11,8 @@
 #import "SWTeamMember.h"
 #import "SWTeamMemberHeadShotCell.h"
 #import "SWWebsiteScrapper.h"
+#import "SWTeamDetailViewController.h"
+#import "SWHeadshotImageView.h"
 
 @interface SWTeamMasterCollectionViewController () <UICollectionViewDataSource>
 
@@ -51,7 +53,7 @@
     
     [super viewDidLoad];
     
-    self.title = @"Team Members Master View";
+    self.title = @"The Team";
     self.collectionView.alwaysBounceVertical = YES;
 }
 
@@ -68,7 +70,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 self.collectionView.alpha = 0.0f;
-                [UIView animateWithDuration:0.3f animations:^{
+
+                [UIView animateWithDuration:0.2f animations:^{
                     
                     [self.collectionView reloadData];
                     self.collectionView.alpha = 1.0f;
@@ -112,6 +115,22 @@
     cell.headShotImageView.image = teamMember.image;
     
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    SWTeamDetailViewController *vc = [segue destinationViewController];
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+    
+    SWTeamMember *teamMember = self.teamMembers[indexPath.item];
+    
+    vc.name = [NSString stringWithFormat:@"%@ %@", teamMember.firstName, teamMember.surname];
+    vc.headshotImage = teamMember.image;
+    vc.position = teamMember.position;
+    vc.description = teamMember.description;
+    
+    vc.title = [NSString stringWithFormat:@"%@ %@", teamMember.firstName, teamMember.surname];
 }
 
 @end
