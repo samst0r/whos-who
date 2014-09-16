@@ -9,6 +9,13 @@ Description
 - Images are cached using NSURLSession caching.
 - Website is parsed using hpple and xPath.
 
+Acceptance Criteria
+-------------------
+
+- Level 1 - Completed
+- Level 2 - Completed
+- Level 3 - Completed
+
 Installation
 ------------
 
