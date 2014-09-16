@@ -120,6 +120,12 @@ describe(@"SWTeamMasterCollectionView", ^{
             
             [teamMasterCollectionViewController refresh];
         });
+        
+        it(@"should refresh when the refresh button is pressed", ^{
+           
+            [[teamMasterCollectionViewController should] receive:@selector(refresh)];
+            [teamMasterCollectionViewController refreshButtonPressed:nil];
+        });
     });
 });
 

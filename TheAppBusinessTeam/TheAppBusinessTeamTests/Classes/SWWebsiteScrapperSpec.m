@@ -45,6 +45,28 @@ describe(@"SWWebsiteScrapper", ^{
                 
             }];
         });
+        
+        it(@"should download the image from the url and pass it back to the completion block", ^{
+
+            __block UIImage *image = [[UIImage alloc] init];
+            
+            [[NSURLSession sharedSession] stub:@selector(dataTaskWithURL:completionHandler:)
+                                     withBlock:^id(NSArray *params) {
+                                         
+                                         void (^completionBlock)(NSData *data,
+                                                                 NSURLResponse *response,
+                                                                 NSError *error) = params[1];
+                                         
+                                         completionBlock(image, [NSURLResponse mock], [NSError mock]);
+                                         
+                                         return nil;
+                                     }];
+            
+            [SWWebsiteScrapper downloadImageFromURL:nil
+                                withCompletionBlock:^(BOOL success, UIImage *image) {
+                
+            }];
+        });
     });
 });
 
