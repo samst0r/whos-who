@@ -17,6 +17,21 @@
     return YES;
 }
 
+-(void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    [[NSURLSession sharedSession] invalidateAndCancel];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    
+    [[NSURLSession sharedSession] invalidateAndCancel];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    
+    [[NSURLSession sharedSession] invalidateAndCancel];
+}
+
 - (void)setupNSURLSessionCache {
     
     NSUInteger cacheSizeMemory = 50 * 1024 * 1024;
