@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class SWHeadshotImageView;
+
 @interface SWTeamMemberHeadShotCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *headShotImageView;
+@property (weak, nonatomic) IBOutlet SWHeadshotImageView *headShotImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *positionLabel;
 

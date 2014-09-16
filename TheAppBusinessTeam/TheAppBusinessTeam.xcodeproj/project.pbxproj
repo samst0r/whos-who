@@ -11,6 +11,7 @@
 		22248ABA19C633E900828E5C /* SWWebsiteParserSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 22248AB919C633E900828E5C /* SWWebsiteParserSpec.m */; };
 		22248ABD19C635C500828E5C /* testWebsite.html in Resources */ = {isa = PBXBuildFile; fileRef = 22248ABC19C635C500828E5C /* testWebsite.html */; };
 		2255518B19C65AEC003990C9 /* SWHeadshotImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2255518A19C65AEC003990C9 /* SWHeadshotImageView.m */; };
+		2255518E19C65EC9003990C9 /* SWTeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2255518D19C65EC9003990C9 /* SWTeamDetailViewController.m */; };
 		22725A2019C5F1EC000E342E /* SWTeamMasterCollectionViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 22725A1B19C5F1EC000E342E /* SWTeamMasterCollectionViewSpec.m */; };
 		22725A2119C5F1EC000E342E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22725A1D19C5F1EC000E342E /* InfoPlist.strings */; };
 		22786CE719C6213500AA4F2E /* SWTeamMemberHeadShotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22786CE619C6213500AA4F2E /* SWTeamMemberHeadShotCell.m */; };
@@ -30,7 +31,6 @@
 		22FA8EA219C3187E00D07ADC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22FA8E9319C3187E00D07ADC /* InfoPlist.strings */; };
 		22FA8EA319C3187E00D07ADC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FA8E9519C3187E00D07ADC /* main.m */; };
 		22FA8EA419C3187E00D07ADC /* SWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FA8E9719C3187E00D07ADC /* SWAppDelegate.m */; };
-		22FA8EAA19C318D500D07ADC /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22FA8E9B19C3187E00D07ADC /* Main_iPad.storyboard */; };
 		22FA8EAB19C318D500D07ADC /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22FA8E9D19C3187E00D07ADC /* Main_iPhone.storyboard */; };
 		B8366B2BC43E4808B8232FE8 /* libPods-TheAppBusinessTeamTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C902834DDB4493589D35C89 /* libPods-TheAppBusinessTeamTests.a */; };
 		D439C4A600534327964177B6 /* libPods-TheAppBusinessTeam.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AD72DB68F7141AD9BA973F4 /* libPods-TheAppBusinessTeam.a */; };
@@ -53,6 +53,8 @@
 		22248ABC19C635C500828E5C /* testWebsite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = testWebsite.html; sourceTree = "<group>"; };
 		2255518919C65AEC003990C9 /* SWHeadshotImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHeadshotImageView.h; sourceTree = "<group>"; };
 		2255518A19C65AEC003990C9 /* SWHeadshotImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHeadshotImageView.m; sourceTree = "<group>"; };
+		2255518C19C65EC9003990C9 /* SWTeamDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTeamDetailViewController.h; sourceTree = "<group>"; };
+		2255518D19C65EC9003990C9 /* SWTeamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTeamDetailViewController.m; sourceTree = "<group>"; };
 		22725A1B19C5F1EC000E342E /* SWTeamMasterCollectionViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTeamMasterCollectionViewSpec.m; sourceTree = "<group>"; };
 		22725A1E19C5F1EC000E342E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22725A1F19C5F1EC000E342E /* TheAppBusinessTeamTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TheAppBusinessTeamTests-Info.plist"; sourceTree = "<group>"; };
@@ -80,7 +82,6 @@
 		22FA8E9719C3187E00D07ADC /* SWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAppDelegate.m; sourceTree = "<group>"; };
 		22FA8E9819C3187E00D07ADC /* TheAppBusinessTeam-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TheAppBusinessTeam-Info.plist"; sourceTree = "<group>"; };
 		22FA8E9919C3187E00D07ADC /* TheAppBusinessTeam-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TheAppBusinessTeam-Prefix.pch"; sourceTree = "<group>"; };
-		22FA8E9C19C3187E00D07ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		22FA8E9E19C3187E00D07ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		2C902834DDB4493589D35C89 /* libPods-TheAppBusinessTeamTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheAppBusinessTeamTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD72DB68F7141AD9BA973F4 /* libPods-TheAppBusinessTeam.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheAppBusinessTeam.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +227,8 @@
 			children = (
 				22F7E95019C5F57B00477DCF /* SWTeamMasterCollectionViewController.h */,
 				22F7E95119C5F57B00477DCF /* SWTeamMasterCollectionViewController.m */,
+				2255518C19C65EC9003990C9 /* SWTeamDetailViewController.h */,
+				2255518D19C65EC9003990C9 /* SWTeamDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -263,7 +266,6 @@
 		22FA8E9A19C3187E00D07ADC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				22FA8E9B19C3187E00D07ADC /* Main_iPad.storyboard */,
 				22FA8E9D19C3187E00D07ADC /* Main_iPhone.storyboard */,
 				22786CE519C6213500AA4F2E /* SWTeamMemberHeadShotCell.h */,
 				22786CE619C6213500AA4F2E /* SWTeamMemberHeadShotCell.m */,
@@ -354,7 +356,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22FA8EAA19C318D500D07ADC /* Main_iPad.storyboard in Resources */,
 				22FA8EAB19C318D500D07ADC /* Main_iPhone.storyboard in Resources */,
 				22FA8EA119C3187E00D07ADC /* Images.xcassets in Resources */,
 				22FA8EA219C3187E00D07ADC /* InfoPlist.strings in Resources */,
@@ -443,6 +444,7 @@
 				2255518B19C65AEC003990C9 /* SWHeadshotImageView.m in Sources */,
 				22FA8EA419C3187E00D07ADC /* SWAppDelegate.m in Sources */,
 				22FA8EA319C3187E00D07ADC /* main.m in Sources */,
+				2255518E19C65EC9003990C9 /* SWTeamDetailViewController.m in Sources */,
 				22248AB719C6338C00828E5C /* SWWebsiteParser.m in Sources */,
 				22A2889B19C5FF2200D216CB /* SWTeamMember.m in Sources */,
 				22D0B2B219C6469900ACE9A9 /* SWWebsiteScrapper.m in Sources */,
@@ -488,14 +490,6 @@
 				22FA8E9419C3187E00D07ADC /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		22FA8E9B19C3187E00D07ADC /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				22FA8E9C19C3187E00D07ADC /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		22FA8E9D19C3187E00D07ADC /* Main_iPhone.storyboard */ = {

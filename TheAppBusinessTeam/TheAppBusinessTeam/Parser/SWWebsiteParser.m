@@ -22,27 +22,31 @@
     
     NSMutableArray *teamMembers = [[NSMutableArray alloc] init];
     
-    for (id teamMemberElement in teamMemberElements) {
+    if (teamMemberElements) {
     
-        NSArray *names = [[[teamMemberElement firstChildWithTagName:@"h3"] text] componentsSeparatedByString:@" "];
-        
-        NSString *firstName = [names firstObject];
-        NSString *surname = [names lastObject];
-        
-        NSString *position = [[teamMemberElement firstChildWithTagName:@"p"] text];
-        NSString *description = [[teamMemberElement firstChildWithClassName:@"user-description"] text];
-        
-        [teamMemberElement firstChildWithClassName:@"title"];
-        
-        NSString *imageURL = [[[teamMemberElement firstChildWithClassName:@"title"] firstChildWithTagName:@"img"] objectForKey:@"src"];
-        
-        SWTeamMember *teamMember = [[SWTeamMember alloc] initWithFirstName:firstName
-                                                                   surname:surname
-                                                                  position:position
-                                                               description:description
-                                                                  imageURL:imageURL];
-        
-        [teamMembers addObject:teamMember];
+        for (id teamMemberElement in teamMemberElements) {
+            
+            NSArray *names = [[[teamMemberElement firstChildWithTagName:@"h3"] text] componentsSeparatedByString:@" "];
+            
+            NSString *firstName = [names firstObject];
+            NSString *surname = [names lastObject];
+            
+            NSString *position = [[teamMemberElement firstChildWithTagName:@"p"] text];
+            NSString *description = [[teamMemberElement firstChildWithClassName:@"user-description"] text];
+            
+            [teamMemberElement firstChildWithClassName:@"title"];
+            
+            NSString *imageURL = [[[teamMemberElement firstChildWithClassName:@"title"] firstChildWithTagName:@"img"] objectForKey:@"src"];
+            
+            SWTeamMember *teamMember = [[SWTeamMember alloc] initWithFirstName:firstName
+                                                                       surname:surname
+                                                                      position:position
+                                                                   description:description
+                                                                      imageURL:imageURL];
+            
+            [teamMembers addObject:teamMember];
+        }
+    
     }
     
     return teamMembers;

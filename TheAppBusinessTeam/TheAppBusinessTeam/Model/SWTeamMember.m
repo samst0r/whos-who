@@ -8,6 +8,13 @@
 
 #import "SWTeamMember.h"
 
+static NSString *const firstNameKey = @"firstName";
+static NSString *const surnameKey = @"surname";
+static NSString *const positonKey = @"positionKey";
+static NSString *const descriptionKey = @"descriptionKey";
+static NSString *const imageKey = @"imageKey";
+static NSString *const imageURLKey = @"imageURLKey";
+
 @implementation SWTeamMember
 
 - (instancetype)initWithFirstName:(NSString *)firstName
@@ -65,5 +72,31 @@
             }] resume];
 }
 
+#pragma mark - Encoding
+
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    
+    self = [self init];
+    if (self) {
+        
+        _firstName = [decoder decodeObjectForKey:firstNameKey];
+        _surname = [decoder decodeObjectForKey:surnameKey];
+        _position = [decoder decodeObjectForKey:positonKey];
+        _description = [decoder decodeObjectForKey:descriptionKey];
+        _imageURL = [decoder decodeObjectForKey:imageURLKey];
+        _image = [decoder decodeObjectForKey:imageKey];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    
+    [encoder encodeObject:self.firstName forKey:firstNameKey];
+    [encoder encodeObject:self.surname forKey:surnameKey];
+    [encoder encodeObject:self.position forKey:positonKey];
+    [encoder encodeObject:self.description forKey:descriptionKey];
+    [encoder encodeObject:self.imageURL forKey:imageURLKey];
+    [encoder encodeObject:self.image forKey:imageKey];
+}
 
 @end

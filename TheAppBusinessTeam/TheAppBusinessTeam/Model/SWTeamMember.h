@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SWTeamMember : NSObject
+@interface SWTeamMember : NSObject <NSCoding>
 
 @property (nonatomic, readonly, copy) NSString *firstName;
 @property (nonatomic, readonly, copy) NSString *surname;

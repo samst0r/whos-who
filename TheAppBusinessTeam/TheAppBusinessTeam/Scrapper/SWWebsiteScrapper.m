@@ -8,6 +8,7 @@
 
 #import "SWWebsiteScrapper.h"
 #import "SWWebsiteParser.h"
+#import "SWTeamMember.h"
 
 static NSString *websiteURL = @"http://www.theappbusiness.com/our-team/";
 
@@ -16,9 +17,13 @@ static NSString *websiteURL = @"http://www.theappbusiness.com/our-team/";
 + (void)downloadDataWithCompletionBlock:(void (^)(BOOL success, NSArray *teamMembers))completionBlock {
     
     NSURLSession *session = [NSURLSession sharedSession];
-     
-    [[session dataTaskWithURL:[NSURL URLWithString:websiteURL]
-            completionHandler:^(NSData *data,
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:websiteURL]
+                                             cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                         timeoutInterval:24 * 60];
+    
+    [[session dataTaskWithRequest:request
+                completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
 
@@ -27,20 +32,26 @@ static NSString *websiteURL = @"http://www.theappbusiness.com/our-team/";
             }] resume];
 }
 
-+ (void)downloadImageFromURL:(NSURL *)url withCompletionBlock:(void (^)(BOOL success, UIImage *image))completionBlock {
++ (void)downloadImageFromURL:(NSURL *)url
+         withCompletionBlock:(void (^)(BOOL success, UIImage *image))completionBlock {
     
     NSURLSession *session = [NSURLSession sharedSession];
     
-    [[session dataTaskWithURL:url
-            completionHandler:^(NSData *data,
-                                NSURLResponse *response,
-                                NSError *error) {
-                
-                UIImage *image = [UIImage imageWithData:data];
-                
-                completionBlock((error == nil), image);
-                
-            }] resume];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url
+                                             cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                         timeoutInterval:24 * 60];
+    
+    [[session dataTaskWithRequest:request
+                completionHandler:^(NSData *data,
+                                    NSURLResponse *response,
+                                    NSError *error) {
+                    
+                    UIImage *image = [UIImage imageWithData:data];
+                    
+                    completionBlock((error == nil), image);
+                    
+                }] resume];
 }
 
 @end
+

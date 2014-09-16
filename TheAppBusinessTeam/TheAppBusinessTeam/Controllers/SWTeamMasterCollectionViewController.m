@@ -11,10 +11,13 @@
 #import "SWTeamMember.h"
 #import "SWTeamMemberHeadShotCell.h"
 #import "SWWebsiteScrapper.h"
+#import "SWTeamDetailViewController.h"
+#import "SWHeadshotImageView.h"
 
 @interface SWTeamMasterCollectionViewController () <UICollectionViewDataSource>
 
 @property (nonatomic, copy) NSArray *teamMembers;
+@property (nonatomic) UILabel *error;
 
 @end
 
@@ -51,11 +54,38 @@
     
     [super viewDidLoad];
     
-    self.title = @"Team Members Master View";
+    self.title = @"Meet The Team";
     self.collectionView.alwaysBounceVertical = YES;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
-#pragma mark -
+#pragma mark - Refreshing
+
+- (void)loadImagesForTeamMembers {
+    
+    for (int i = 0; i < self.teamMembers.count; ++i) {
+        
+        SWTeamMember *teamMember = self.teamMembers[i];
+        
+        [teamMember getImageWithCompletionBlock:^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+            
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                SWTeamMemberHeadShotCell *cell = (SWTeamMemberHeadShotCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+                
+                [self.collectionView performBatchUpdates:^{
+                    
+                    [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    
+                    cell.headShotImageView.alpha = 1.0f;
+                } completion:^(BOOL finished) {
+                    
+                }];
+            });
+        }];
+    }
+}
 
 - (void)refresh {
     
@@ -66,29 +96,26 @@
             self.teamMembers = teamMembers;
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                
-                self.collectionView.alpha = 0.0f;
-                [UIView animateWithDuration:0.3f animations:^{
-                    
-                    [self.collectionView reloadData];
-                    self.collectionView.alpha = 1.0f;
-                }];
+
+                [self.collectionView reloadData];
             });
             
-            for (int i = 0; i < self.teamMembers.count; ++i) {
-                
-                SWTeamMember *teamMember = self.teamMembers[i];
-                
-                [teamMember getImageWithCompletionBlock:^{
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:i inSection:0]]];
-                    });
-                }];
-            }
+            [self loadImagesForTeamMembers];
+            
+        } else {
+            
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                       message:NSLocalizedString(@"An internet connection is needed initally, press Refresh when you have data access", nil)
+                                      delegate:nil
+                             cancelButtonTitle:NSLocalizedString(@"Okay", nil)
+                             otherButtonTitles:nil] show];
         }
     }];
+}
+
+- (IBAction)refreshBarButtonPressed:(id)sender {
+    
+    [self refresh];
 }
 
 #pragma mark - UICollectionViewDataSource Methods
@@ -112,6 +139,23 @@
     cell.headShotImageView.image = teamMember.image;
     
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    SWTeamDetailViewController *vc = [segue destinationViewController];
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:sender];
+    
+    SWTeamMember *teamMember = self.teamMembers[indexPath.item];
+    
+    vc.name = [NSString stringWithFormat:@"%@ %@", teamMember.firstName, teamMember.surname];
+    
+    vc.headshotImage = teamMember.image;
+    vc.position = teamMember.position;
+    vc.description = teamMember.description;
+    
+    vc.title = [NSString stringWithFormat:@"%@ %@", teamMember.firstName, teamMember.surname];
 }
 
 @end
